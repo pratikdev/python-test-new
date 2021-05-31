@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  django:
+    build: ./api
+    command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+    volumes:
+      - ./api:/app
+      - db-data:/db
+    ports:
+      - "8000:8000"
+  frontend:
+    build: ./frontend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+
+volumes:
+  db-data:
+  node-modules:
